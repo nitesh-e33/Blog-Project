@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -37,11 +38,11 @@ class DemoController extends Controller
             ]
         );
         if ($request->hasFile('image')) {
-            // $file = $request->file('image');
-            // $extension = $file->getClientOriginalExtension();
-            // $filename = time() . '.' . $extension;
-            // $file->move('uploads/customers', $filename);
-            $filename = $request->file('image')->store('user_images', 'public');
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/customers', $filename);
+            // $filename = $request->file('image')->store('user_images', 'public');
             $input['image'] = $filename;
         }
         $apiUrl = self::API_URL."/register";

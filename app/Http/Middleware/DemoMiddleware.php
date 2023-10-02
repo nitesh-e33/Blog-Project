@@ -18,6 +18,7 @@ class DemoMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $path = $request->path();
         if(session()->get('customer_id')){
             return $next($request);
         } 
